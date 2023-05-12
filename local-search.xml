@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>Niagara-Decal Render</title>
+    <link href="/2023/05/12/decal/"/>
+    <url>/2023/05/12/decal/</url>
+    
+    <content type="html"><![CDATA[<h1 id="DecalRender"><a href="#DecalRender" class="headerlink" title="DecalRender"></a>DecalRender</h1><h2 id="DecalSize-对齐默认大小"><a href="#DecalSize-对齐默认大小" class="headerlink" title="DecalSize 对齐默认大小"></a>DecalSize 对齐默认大小</h2><p>默认Decal材质拖入场景时，它的Size是(128,256,256).<br>Ns中的Decal 与 默认Decal 的比例关系是 2:1.<br>要想和默认的Decal大小一致，那么DecalSize应该是 (256,512,512).</p><img src="/2023/05/12/decal/DecalSize2.jpg"><p>但是视差效果依然有BUG，需要修改旋转.</p><img src="/2023/05/12/decal/DecalSize.jpg"><h2 id="DecalRotator-修复视差错误"><a href="#DecalRotator-修复视差错误" class="headerlink" title="DecalRotator 修复视差错误"></a>DecalRotator 修复视差错误</h2><p>DecalRender 与 默认Decal 的旋转并不一致，需要手动调整，</p><img src="/2023/05/12/decal/Rotate3.jpg"><p>Orientation Vector 的 Z 改为 1 ，旋转空间 改为 Decal，然后旋转0.75.</p><img src="/2023/05/12/decal/Rotate2.jpg"><p>视差错误就修复好了.</p><img src="/2023/05/12/decal/Rotate.jpg"><h2 id="Binding"><a href="#Binding" class="headerlink" title="Binding"></a>Binding</h2><p>值得一提的是，在DecalRender中，并没有Dynamic参数,</p><p>只能通过 DecalFade  与 Color 传值给材质. RGBA + 1 ，共5个参数可用.</p><img src="/2023/05/12/decal/Binding.jpg"><img src="/2023/05/12/decal/Material.jpg"><h1 id="完结撒花"><a href="#完结撒花" class="headerlink" title="完结撒花"></a>完结撒花</h1>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Power</title>
     <link href="/2023/05/11/power/"/>
     <url>/2023/05/11/power/</url>
