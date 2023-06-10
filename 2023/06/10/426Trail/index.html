@@ -16,29 +16,27 @@
   <meta name="author" content="sss">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DecalRenderDecalSize 对齐默认大小默认Decal材质拖入场景时，它的Size是(128,256,256).Ns中的Decal 与 默认Decal 的比例关系是 2:1.要想和默认的Decal大小一致，那么DecalSize应该是 (256,512,512).   但是视差效果依然有BUG，需要修改旋转.   DecalRotator 修复视差错误DecalRender 与 默认">
+    <meta name="description" content="C++继承自 AnimNotifyState_TimedNiagaraEffect 类 4.26版本需要添加一个 UFXSystemComponent* 用于接收Spawn的Niagara组件 meta属性 AnimNotifyBoneName &#x3D; “true”  可以自动搜索骨骼名字 .h 12345678910111213141516171819202122232425262728293031">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Niagara-Decal Render">
-<meta property="og:url" content="https://silencespoon.github.io/2023/05/12/decal/index.html">
+<meta property="og:title" content="UE4.26 Niagara Trail">
+<meta property="og:url" content="https://silencespoon.github.io/2023/06/10/426Trail/index.html">
 <meta property="og:site_name" content="Silence&amp;Spoon">
-<meta property="og:description" content="DecalRenderDecalSize 对齐默认大小默认Decal材质拖入场景时，它的Size是(128,256,256).Ns中的Decal 与 默认Decal 的比例关系是 2:1.要想和默认的Decal大小一致，那么DecalSize应该是 (256,512,512).   但是视差效果依然有BUG，需要修改旋转.   DecalRotator 修复视差错误DecalRender 与 默认">
+<meta property="og:description" content="C++继承自 AnimNotifyState_TimedNiagaraEffect 类 4.26版本需要添加一个 UFXSystemComponent* 用于接收Spawn的Niagara组件 meta属性 AnimNotifyBoneName &#x3D; “true”  可以自动搜索骨骼名字 .h 12345678910111213141516171819202122232425262728293031">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://silencespoon.github.io/2023/05/12/decal/DecalSize2.jpg">
-<meta property="og:image" content="https://silencespoon.github.io/2023/05/12/decal/DecalSize.jpg">
-<meta property="og:image" content="https://silencespoon.github.io/2023/05/12/decal/Rotate3.jpg">
-<meta property="og:image" content="https://silencespoon.github.io/2023/05/12/decal/Rotate2.jpg">
-<meta property="og:image" content="https://silencespoon.github.io/2023/05/12/decal/Rotate.jpg">
-<meta property="og:image" content="https://silencespoon.github.io/2023/05/12/decal/Binding.jpg">
-<meta property="og:image" content="https://silencespoon.github.io/2023/05/12/decal/Material.jpg">
-<meta property="article:published_time" content="2023-05-12T02:54:40.233Z">
-<meta property="article:modified_time" content="2023-05-12T03:18:04.594Z">
+<meta property="og:image" content="https://silencespoon.github.io/2023/06/10/426Trail/Ribbon.png">
+<meta property="og:image" content="https://silencespoon.github.io/2023/06/10/426Trail/%E5%B9%B3%E9%93%BA1.png">
+<meta property="og:image" content="https://silencespoon.github.io/2023/06/10/426Trail/%E5%B9%B3%E9%93%BA2.png">
+<meta property="og:image" content="https://silencespoon.github.io/2023/06/10/426Trail/TrailRen1.png">
+<meta property="og:image" content="https://silencespoon.github.io/2023/06/10/426Trail/TrailRen.png">
+<meta property="article:published_time" content="2023-06-10T12:42:14.483Z">
+<meta property="article:modified_time" content="2023-06-10T12:57:33.759Z">
 <meta property="article:author" content="Silence&amp;Spoon">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://silencespoon.github.io/2023/05/12/decal/DecalSize2.jpg">
+<meta name="twitter:image" content="https://silencespoon.github.io/2023/06/10/426Trail/Ribbon.png">
   
   
   
-  <title>Niagara-Decal Render - Silence&amp;Spoon</title>
+  <title>UE4.26 Niagara Trail - Silence&amp;Spoon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -182,7 +180,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Niagara-Decal Render"></span>
+            <span id="subtitle" data-typed-text="UE4.26 Niagara Trail"></span>
           
         </div>
 
@@ -193,8 +191,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-12 10:54" pubdate>
-          2023年5月12日 上午
+        <time datetime="2023-06-10 20:42" pubdate>
+          2023年6月10日 晚上
         </time>
       </span>
     
@@ -205,7 +203,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          344 字
+          2.6k 字
         
       </span>
     
@@ -216,7 +214,7 @@
         
         
         
-          3 分钟
+          22 分钟
         
       </span>
     
@@ -259,37 +257,30 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Niagara-Decal Render</h1>
+            <h1 style="display: none">UE4.26 Niagara Trail</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="DecalRender"><a href="#DecalRender" class="headerlink" title="DecalRender"></a>DecalRender</h1><h2 id="DecalSize-对齐默认大小"><a href="#DecalSize-对齐默认大小" class="headerlink" title="DecalSize 对齐默认大小"></a>DecalSize 对齐默认大小</h2><p>默认Decal材质拖入场景时，它的Size是(128,256,256).<br>Ns中的Decal 与 默认Decal 的比例关系是 2:1.<br>要想和默认的Decal大小一致，那么DecalSize应该是 (256,512,512).</p>
-<img src="/2023/05/12/decal/DecalSize2.jpg" srcset="/img/loading.gif" lazyload>
+                <h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><p>继承自 AnimNotifyState_TimedNiagaraEffect 类</p>
+<p>4.26版本需要添加一个 UFXSystemComponent* 用于接收Spawn的Niagara组件</p>
+<p>meta属性 AnimNotifyBoneName = “true”  可以自动搜索骨骼名字</p>
+<p>.h</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// Fill out your copyright notice in the Description page of Project Settings.</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> once</span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;CoreMinimal.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;AnimNotifyState_TimedNiagaraEffect.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;NiagaraTrails.generated.h&quot;</span></span><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * </span><br><span class="hljs-comment"> */</span><br><span class="hljs-built_in">UCLASS</span>(Blueprintable, meta = (DisplayName = <span class="hljs-string">&quot;Niagara Trail&quot;</span>))<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">NIAGARATRAIL_API</span> UNiagaraTrails : <span class="hljs-keyword">public</span> UAnimNotifyState_TimedNiagaraEffect<br>&#123;<br>	<span class="hljs-built_in">GENERATED_BODY</span>()<br><span class="hljs-keyword">protected</span>:<br>	<span class="hljs-built_in">UPROPERTY</span>(EditAnywhere,BlueprintReadOnly,Category = NiagaraSystem,meta = (AnimNotifyBoneName = <span class="hljs-string">&quot;true&quot;</span>))<br>	FName SocketA;<br><br>	<span class="hljs-built_in">UPROPERTY</span>(EditAnywhere,BlueprintReadOnly,Category = NiagaraSystem,meta = (AnimNotifyBoneName = <span class="hljs-string">&quot;true&quot;</span>))<br>	FName SocketB;<br><br>	<span class="hljs-built_in">UPROPERTY</span>()<br>	UFXSystemComponent* NiagaraComponent;<br>	<br>	<span class="hljs-built_in">UPROPERTY</span>(EditAnywhere,BlueprintReadOnly,Category = NiagaraSystem)<br>	FName NiagaraParameter1 = <span class="hljs-string">&quot;TrailSocket1&quot;</span>;<br><br>	<span class="hljs-built_in">UPROPERTY</span>(EditAnywhere,BlueprintReadOnly,Category = NiagaraSystem)<br>	FName NiagaraParameter2 = <span class="hljs-string">&quot;TrailSocket2&quot;</span>;<br>	<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">NotifyBegin</span><span class="hljs-params">(<span class="hljs-keyword">class</span> USkeletalMeshComponent * MeshComp, <span class="hljs-keyword">class</span> UAnimSequenceBase * Animation, <span class="hljs-type">float</span> TotalDuration)</span> <span class="hljs-keyword">override</span></span>;<br>	<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">NotifyTick</span><span class="hljs-params">(USkeletalMeshComponent * MeshComp, UAnimSequenceBase * Animation, <span class="hljs-type">float</span> FrameDeltaTime)</span></span>;<br>	<br><br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">NiagaraTrail</span><span class="hljs-params">(USkeletalMeshComponent* Mesh,UFXSystemComponent* Niagara)</span></span>;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
 
-<p>但是视差效果依然有BUG，需要修改旋转.</p>
-<img src="/2023/05/12/decal/DecalSize.jpg" srcset="/img/loading.gif" lazyload>
-
-<h2 id="DecalRotator-修复视差错误"><a href="#DecalRotator-修复视差错误" class="headerlink" title="DecalRotator 修复视差错误"></a>DecalRotator 修复视差错误</h2><p>DecalRender 与 默认Decal 的旋转并不一致，需要手动调整，</p>
-<img src="/2023/05/12/decal/Rotate3.jpg" srcset="/img/loading.gif" lazyload>
-
-
-
-<p>Orientation Vector 的 Z 改为 1 ，旋转空间 改为 Decal，然后旋转0.75.</p>
-<img src="/2023/05/12/decal/Rotate2.jpg" srcset="/img/loading.gif" lazyload>
+<p>.cpp</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// Fill out your copyright notice in the Description page of Project Settings.</span><br><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;NiagaraTrails.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Components/SkeletalMeshComponent.h&quot;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&quot;Particles/ParticleSystemComponent.h&quot;</span></span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UNiagaraTrails::NotifyBegin</span><span class="hljs-params">(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, <span class="hljs-type">float</span> TotalDuration)</span></span><br><span class="hljs-function"></span>&#123;<br>	NiagaraComponent = <span class="hljs-built_in">SpawnEffect</span>(MeshComp,Animation);<br><br>	<span class="hljs-keyword">if</span> (NiagaraComponent)<br>	&#123;<br>		<span class="hljs-comment">// tag the component with the AnimNotify that is triggering the animation so that we can properly clean it up</span><br>		NiagaraComponent-&gt;ComponentTags.<span class="hljs-built_in">AddUnique</span>(<span class="hljs-built_in">GetFName</span>());<br>	&#125;<br>&#125;<br><br><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UNiagaraTrails::NotifyTick</span><span class="hljs-params">(USkeletalMeshComponent* MeshComp, UAnimSequenceBase* Animation, <span class="hljs-type">float</span> FrameDeltaTime)</span></span><br><span class="hljs-function"></span>&#123;<br>	Super::<span class="hljs-built_in">NotifyTick</span>(MeshComp, Animation, FrameDeltaTime);<br>	<span class="hljs-built_in">NiagaraTrail</span>(MeshComp,NiagaraComponent);<br>	<br>&#125;<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">UNiagaraTrails::NiagaraTrail</span><span class="hljs-params">(USkeletalMeshComponent* Mesh, UFXSystemComponent* Niagara)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span>(Mesh &amp;&amp; Niagara)<br>	&#123;<br>		Niagara-&gt;<span class="hljs-built_in">SetVectorParameter</span>(NiagaraParameter1,Mesh-&gt;<span class="hljs-built_in">GetSocketLocation</span>(SocketA));<br>		Niagara-&gt;<span class="hljs-built_in">SetVectorParameter</span>(NiagaraParameter2,Mesh-&gt;<span class="hljs-built_in">GetSocketLocation</span>(SocketB));<br>		<br>	&#125;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
 
 
 
-<p>视差错误就修复好了.</p>
-<img src="/2023/05/12/decal/Rotate.jpg" srcset="/img/loading.gif" lazyload>
+<h1 id="Trail平铺UV"><a href="#Trail平铺UV" class="headerlink" title="Trail平铺UV"></a>Trail平铺UV</h1><p><img src="/2023/06/10/426Trail/Ribbon.png" srcset="/img/loading.gif" lazyload alt="Ribbon"></p>
+<p>NM Update Travel Distance</p>
+<p><img src="/2023/06/10/426Trail/%E5%B9%B3%E9%93%BA1.png" srcset="/img/loading.gif" lazyload alt="平铺1"></p>
+<p>NM Trail</p>
+<p><img src="/2023/06/10/426Trail/%E5%B9%B3%E9%93%BA2.png" srcset="/img/loading.gif" lazyload alt="平铺2"></p>
+<h1 id="完结撒花"><a href="#完结撒花" class="headerlink" title="完结撒花"></a>完结撒花</h1><p><img src="/2023/06/10/426Trail/TrailRen1.png" srcset="/img/loading.gif" lazyload alt="TrailRen"></p>
+<p><img src="/2023/06/10/426Trail/TrailRen.png" srcset="/img/loading.gif" lazyload alt="TrailRen"></p>
 
-<h2 id="Binding"><a href="#Binding" class="headerlink" title="Binding"></a>Binding</h2><p>值得一提的是，在DecalRender中，并没有Dynamic参数,</p>
-<p>只能通过 DecalFade  与 Color 传值给材质. RGBA + 1 ，共5个参数可用.</p>
-<img src="/2023/05/12/decal/Binding.jpg" srcset="/img/loading.gif" lazyload>
-
-<img src="/2023/05/12/decal/Material.jpg" srcset="/img/loading.gif" lazyload>
-
-<h1 id="完结撒花"><a href="#完结撒花" class="headerlink" title="完结撒花"></a>完结撒花</h1>
                 
               </div>
             
@@ -308,18 +299,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/10/426Trail/" title="UE4.26 Niagara Trail">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">UE4.26 Niagara Trail</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/11/power/" title="Power">
-                        <span class="hidden-mobile">Power</span>
+                      <a href="/2023/05/12/decal/" title="Niagara-Decal Render">
+                        <span class="hidden-mobile">Niagara-Decal Render</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
